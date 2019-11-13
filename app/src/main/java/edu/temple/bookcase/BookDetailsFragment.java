@@ -1,12 +1,13 @@
 package edu.temple.bookcase;
-import android.content.Context;
-import android.net.Uri;
+import android.graphics.Color;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import com.squareup.picasso.Picasso;
 
 
 /**
@@ -16,18 +17,21 @@ import android.widget.TextView;
  * to handle interaction events.
  */
 public class BookDetailsFragment extends Fragment {
-
+    String title;
     TextView Text;
-    String selected;
+    String author;
+    ImageView image;
+    String published;
     public static final String key = "Title";
+    Book novels;
 
     public BookDetailsFragment() {
     }
 
-    public static BookDetailsFragment newInstance(String novel) {
+    public static BookDetailsFragment newInstance(Book list) {
         BookDetailsFragment fragment = new BookDetailsFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(key, novel);
+        bundle.putParcelable(key, list);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -36,23 +40,31 @@ public class BookDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if(getArguments() != null){
-            selected = getArguments().getString(key);
+            novels = getArguments().getParcelable(key);
         }
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_book_details, container, false);
-        Text = view.findViewById(R.id.tvTitle);
-        //Text.setText(selected);
-        Selection(selected);
-        return view;
+    public void ShowBook(Book bookObj){
+        String pictures = bookObj.getCoverURL();
+        author = bookObj.getAuthor();
+        title = bookObj.getTitle();
+        published = bookObj.getPublished();
+        Text.setText(" \"" + title + "\" ");
+        Text.append(" " + author);
+        Text.append(" " + published);
+        Text.setTextSize(30);
+        Text.setTextColor(Color.BLACK);
+        Picasso.get().load(pictures).into(image);
     }
-
-
-    public void Selection (String selectedItem){
-
-        Text.setText(selectedItem);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_book_details, container, false);
+        Text = view.findViewById(R.id.bookname);
+        image = view.findViewById(R.id.bookpics);
+        if(getArguments() != null) {
+            ShowBook(novels);
+        }
+        return view;
     }
 
 }

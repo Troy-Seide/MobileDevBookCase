@@ -1,27 +1,20 @@
 package edu.temple.bookcase;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.TextView;
 import java.util.ArrayList;
 
-public class MyFragmentAdapter extends FragmentStatePagerAdapter {
+public class MyFragmentAdapter extends BaseAdapter implements Filterable {
+    ArrayList<Book> BD;
+    Context context;
 
-    ArrayList<BookDetailsFragment> BD;
-
-    public MyFragmentAdapter(FragmentManager fm) {
-        super(fm);
-        BD= new ArrayList<>();
-    }
-
-
-    public void add(BookDetailsFragment fragment){
-        BD.add(fragment);
-    }
-
-    @Override
-    public Fragment getItem(int i) {
-        return BD.get(i);
+    public MyFragmentAdapter(Context context, ArrayList<Book> BD) {
+        this.context = context;
+        this.BD = BD;
     }
 
     @Override
@@ -29,6 +22,27 @@ public class MyFragmentAdapter extends FragmentStatePagerAdapter {
         return BD.size();
     }
 
+    @Override
+    public Filter getFilter(){
+        return null;
+    }
 
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        TextView textView = new TextView(context);
+        textView.setText(BD.get(position).getTitle());
+        textView.setTextSize(18);
+        return textView;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return BD.get(position);
+    }
 }
 

@@ -1,15 +1,15 @@
 <resources>
     <string translatable="false" name="app_name">BookCase</string>
     <string-array name="bookArr">
-        <item>"Dune"</item>
-        <item>"The Book of the New Sun"</item>
-        <item>"The Moon Is a Harsh Mistress"</item>
-        <item>"The Dispossessed"</item>
-        <item>"Hyperion"</item>
-        <item>"Neuromancer"</item>
-        <item>"The Stars My Destination"</item>
-        <item>"The Man in the High Castle"</item>
-        <item>"Use of Weapons"</item>
-        <item>"The Foundation Trilogy"</item>
+        <item>"To Kill a Mockingbird"</item>
+        <item>"The Great Gatsby")</item>
+        <item>"Of Mice and Men"</item>
+        <item>"The Silent Patient"</item>
+        <item>"Once More we Saw Stars"</item>
+        <item>"Mrs Everything"</item>
+        <item>"The Night Tiger"</item>
+        <item>"Daisy Jones and The Six"</item>
+        <item>"Underland"</item>
+        <item>"The Unwinding of the iracle"</item>
     </string-array>
 </resources>
